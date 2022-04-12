@@ -29,7 +29,14 @@ fn reg_subtract(i: u32, j: u32, k: u32) {
     println!("R{}- -> L{}, L{} converts to {}", i, j, k, res);
 }
 
+fn reg_add(i: u32, j: u32) {
+    /* Ri+ -> Lj converts to:
+        <<2i, j>> */
 
+    println!("CALCULATING ADD!");
+    let res = calcDoubleOwl(2*i, j);
+    println!("R{}+ -> L{} converts to {}", i, j, res);
+}
 
 
 
