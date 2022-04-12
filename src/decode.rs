@@ -45,14 +45,58 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
     return (x, y)
 }
 
+pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
+
+    //convert number to binary string
+    let bin = format!("{:b}", num);
+    println!("{}", bin);
+
+
+    let mut rev = bin.chars().rev();
+    println!("{:#?}", rev);
+
+    //todo!() refactor out the while true - it's pretty ugly
+
+    let mut x: u32 = 0;
+    let mut y: u32 = 0;
+
+    while true {
+        let next_num = rev.next();
+
+        match next_num {
+            Some('0') => {
+                let substring = &rev.rev().collect::<String>();
+                //convert the rest of the binary to y - if empty set to zero
+                y = u32::from_str_radix(substring, 2).unwrap_or(0);
+                break;
+            },
+            Some('1') => {
+                x += 1;
+                continue;
+            },
+            _ => panic!("Something broke!"),
+        }
+
+    }
+
+    return (x, y)
+
+}
+
 
 mod tests {
-    use super::decodeDoubleOwl;
+    use super::{decodeDoubleOwl, decodeSingleOwl};
 
     #[test]
     fn decodeDoubleOwlTest() {
         assert_eq!(decodeDoubleOwl(34), (1, 8));
         assert_eq!(decodeDoubleOwl(8), (3, 0));
         assert_eq!(decodeDoubleOwl(276), (2, 34));
+    }
+
+    #[test]
+    fn decodeSingleOwlTest() {
+        assert_eq!(decodeSingleOwl(9), (1, 2));
+        assert_eq!(decodeSingleOwl(71), (3, 4));
     }
 }
