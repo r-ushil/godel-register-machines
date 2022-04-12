@@ -38,6 +38,30 @@ fn reg_add(i: u32, j: u32) {
     println!("R{}+ -> L{} converts to {}", i, j, res);
 }
 
+fn list_encoding(nums: Vec<u32>) -> u32 {
+
+    /*  Empty list => 0
+        x : l => <<x, `l`>>, where `l` is the rest of the encoded list */
+        
+    println!("ENCODING A LIST");
+
+    if let Some(head) = nums.get(0) {
+        //list is not empty
+        if nums.len() > 1 {
+            //list is not singleton
+            let tail = list_encoding(nums[1..].to_vec());
+            return calcDoubleOwl(*head, tail)
+        } else {
+            //list is singleton
+            return calcDoubleOwl(*head, 0);
+        }
+    } else {
+        //list is empty
+        return 0
+    }
+
+}
+
 
 
 fn main() {
