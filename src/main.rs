@@ -13,5 +13,12 @@ fn main() {
     let res = encode::reg_subtract(2, 3, 4);
     println!("{}", res);
 
-    println!("Hello, world!");
+
+    /* to decode programs:
+    
+        decode number into a list using decodeList
+        decode each list element (each instr) into a double owl, and single owl if necessary
+        (todo!() -> write a function to make this easier)
+    
+    */
 }

@@ -115,6 +115,8 @@ pub fn decodeList(num: u32) -> Vec<u32> {
 
 }
 
+//todo!() - write decodeProgram, making use of decodeList, decodeDoubleOwl
+
 
 mod tests {
     use crate::decode::decodeList;
