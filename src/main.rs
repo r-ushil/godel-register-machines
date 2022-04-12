@@ -19,6 +19,18 @@ fn calcSingleOwl(x: u32, y: u32) -> u32 {
     res
 }
 
+fn reg_subtract(i: u32, j: u32, k: u32) {
+    /* Ri- -> Lj, Lk converts to:
+            << 2i + 1, <j, k> >>*/
+    println!("CALCULATING SUBTRACT!");
+    println!("Calculating single owl, for second arg in subtract's double owl");
+    let snd = calcSingleOwl(j, k);
+    let res = calcDoubleOwl(2*i + 1, snd);
+    println!("R{}- -> L{}, L{} converts to {}", i, j, k, res);
+}
+
+
+
 
 
 fn main() {
