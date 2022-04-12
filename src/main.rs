@@ -1,4 +1,5 @@
 mod encode;
+mod decode;
 
 fn main() {
     /* to encode programs:
