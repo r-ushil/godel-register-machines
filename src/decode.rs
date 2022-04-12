@@ -117,6 +117,8 @@ pub fn decodeList(num: u32) -> Vec<u32> {
 
 
 mod tests {
+    use crate::decode::decodeList;
+
     use super::{decodeDoubleOwl, decodeSingleOwl};
 
     #[test]
@@ -130,5 +132,12 @@ mod tests {
     fn decodeSingleOwlTest() {
         assert_eq!(decodeSingleOwl(9), (1, 2));
         assert_eq!(decodeSingleOwl(71), (3, 4));
+    }
+
+    #[test]
+    fn decodeListTest() {
+        assert_eq!(decodeList(8), vec![3]);
+        assert_eq!(decodeList(34), vec![1, 3]);
+        assert_eq!(decodeList(276), vec![2, 1, 3]);
     }
 }
