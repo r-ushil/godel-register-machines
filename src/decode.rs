@@ -83,6 +83,38 @@ pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
 
 }
 
+pub fn decodeList(num: u32) -> Vec<u32> {
+
+    let mut res: Vec<u32> = vec!();
+
+    let bin = format!("{:b}", num);
+
+    let mut rev = bin.chars().rev();
+
+    let mut val = 0;
+
+    while true {
+        let next_num = rev.next();
+
+        match next_num {
+            Some('0') => val += 1,
+            Some('1') => {
+                res.push(val.clone());
+                val = 0;
+            },
+            Some(_) => panic!("Something broke!"),
+            None => break,
+        }
+    }
+
+    if val > 0 {
+        res.push(val.clone());
+    }
+
+    return res
+
+}
+
 
 mod tests {
     use super::{decodeDoubleOwl, decodeSingleOwl};
