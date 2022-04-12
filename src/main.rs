@@ -19,6 +19,10 @@ fn calcSingleOwl(x: u32, y: u32) -> u32 {
     res
 }
 
+fn reg_halt() -> u32{
+    return 0
+}
+
 fn reg_subtract(i: u32, j: u32, k: u32) -> u32 {
     /* Ri- -> Lj, Lk converts to:
             << 2i + 1, <j, k> >>*/
