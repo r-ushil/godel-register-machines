@@ -66,3 +66,26 @@ pub fn list_encoding(nums: Vec<u32>) -> u32 {
     }
 
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::encode::{reg_subtract, reg_add, reg_halt};
+
+    use super::list_encoding;
+
+    #[test]
+    fn list_encoding_test() {
+        assert_eq!(list_encoding(vec![3]), 8);
+        assert_eq!(list_encoding(vec![1, 3]), 34);
+        assert_eq!(list_encoding(vec![2, 1, 3]), 276);
+    }
+
+    #[test]
+    fn reg_instr_test() {
+        assert_eq!(reg_subtract(1, 1, 2), 152);
+        assert_eq!(reg_add(0, 0), 1);
+        assert_eq!(reg_subtract(2, 3, 4), 4576);
+        assert_eq!(reg_halt(), 0);
+        assert_eq!(reg_add(0, 2), 5);
+    }
+}
