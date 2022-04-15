@@ -1,7 +1,8 @@
-use crate::instr;
 
 
 pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
+
+    println!("DECODING DOUBLE OWL OF: {}", num);
 
     /* 0 not defined with double owl */
     if num == 0 {
@@ -15,18 +16,15 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
 
     //convert number to binary string
     let bin = format!("{:b}", num);
-    println!("{}", bin);
+    println!("Binary of encoded number: {}", bin);
 
 
     let mut rev = bin.chars().rev();
-    println!("{:#?}", rev);
-
-    //todo!() refactor out the while true - it's pretty ugly
 
     let mut x: u32 = 0;
     let mut y: u32 = 0;
 
-    while true {
+    loop {
         let next_num = rev.next();
 
         match next_num {
@@ -44,26 +42,31 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
         }
 
     }
+
+    println!("Number of trailing zeros: {}", x);
+    let y_bin = format!("{:b}", y);
+    println!("Rest of binary {} into decimal: {}", y_bin, y);
 
     return (x, y)
 }
 
 pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
 
+    println!("DECODING SINGLE OWL!");
+
     //convert number to binary string
     let bin = format!("{:b}", num);
-    println!("{}", bin);
+    println!("Binary of {}: {}", num, bin);
 
 
     let mut rev = bin.chars().rev();
-    println!("{:#?}", rev);
 
     //todo!() refactor out the while true - it's pretty ugly
 
     let mut x: u32 = 0;
     let mut y: u32 = 0;
 
-    while true {
+    loop {
         let next_num = rev.next();
 
         match next_num {
@@ -81,6 +84,10 @@ pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
         }
 
     }
+
+    println!("Number of trailing ones: {}", x);
+    let y_bin = format!("{:b}", y);
+    println!("Rest of binary {} into decimal: {}", y_bin, y);
 
     return (x, y)
 
@@ -96,7 +103,7 @@ pub fn decodeList(num: u32) -> Vec<u32> {
 
     let mut val = 0;
 
-    while true {
+    loop {
         let next_num = rev.next();
 
         match next_num {
