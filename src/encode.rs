@@ -1,3 +1,5 @@
+use crate::instr;
+
 pub fn calcDoubleOwl(x: u32, y: u32) -> u32 {
     /* 2 ^ x * ((2 * y) + 1) */
 

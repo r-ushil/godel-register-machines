@@ -1,3 +1,6 @@
+use crate::instr;
+
+
 pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
 
     /* 0 not defined with double owl */
