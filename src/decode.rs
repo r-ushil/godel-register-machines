@@ -127,6 +127,31 @@ pub fn decodeList(num: u32) -> Vec<u32> {
 
 //todo!() - write decodeProgram, making use of decodeList, decodeDoubleOwl
 
+use crate::instr::RegInstr;
+
+pub fn decodeInstr(num: u32) -> RegInstr {
+
+    //if 0, it's a Halt instruction
+    if num == 0 {
+        return RegInstr::Halt
+    }
+
+    //convert number into double owl
+    let (a, b) = decodeDoubleOwl(num);
+
+
+    //if a is even, it's an add instruction
+    if a % 2 == 0 {
+        let i = a / 2;
+        RegInstr::Add(i, b)
+    } else {
+        let i = (a - 1) / 2;
+        let (j, k) = decodeSingleOwl(b);
+        RegInstr::Sub(i, j, k)
+    }   
+
+}
+
 
 mod tests {
     use crate::decode::decodeList;
