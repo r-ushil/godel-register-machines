@@ -1,4 +1,4 @@
-use crate::instr;
+use crate::instr::*;
 
 pub fn calcDoubleOwl(x: u32, y: u32) -> u32 {
     /* 2 ^ x * ((2 * y) + 1) */
@@ -21,33 +21,54 @@ pub fn calcSingleOwl(x: u32, y: u32) -> u32 {
     res
 }
 
+pub fn encode_instr(instr: RegInstr) -> u32 {
+    match instr {
+        RegInstr::Add(..) => reg_add(instr),
+        RegInstr::Sub(..) => reg_subtract(instr),
+        RegInstr::Halt => reg_halt(),
+    }
+}
+
 pub fn reg_halt() -> u32{
     return 0
 }
 
-pub fn reg_subtract(i: u32, j: u32, k: u32) -> u32 {
-    /* Ri- -> Lj, Lk converts to:
+pub fn reg_subtract(sub_instr: RegInstr) -> u32 {
+
+    if let RegInstr::Sub(i, j, k) = sub_instr {
+        /* Ri- -> Lj, Lk converts to:
             << 2i + 1, <j, k> >>*/
-    println!("CALCULATING SUBTRACT!");
-    println!("Calculating single owl, for second arg in subtract's double owl");
-    let snd = calcSingleOwl(j, k);
-    let res = calcDoubleOwl(2*i + 1, snd);
-    println!("R{}- -> L{}, L{} converts to {}", i, j, k, res);
-    res
+        
+        println!("CALCULATING SUBTRACT!");
+        println!("Calculating single owl, for second arg in subtract's double owl");
+        let snd = calcSingleOwl(j, k);
+        let res = calcDoubleOwl(2*i + 1, snd);
+        println!("R{}- -> L{}, L{} converts to {}", i, j, k, res);
+        res
+    } else {
+        panic!("Wrong type of Register Instruction")
+    }
+
+    
 }
 
-pub fn reg_add(i: u32, j: u32) -> u32 {
-    /* Ri+ -> Lj converts to:
+pub fn reg_add(add_instr: RegInstr) -> u32 {
+
+    if let RegInstr::Add(i, j) = add_instr {
+        /* Ri+ -> Lj converts to:
         <<2i, j>> */
 
-    println!("CALCULATING ADD!");
-    let res = calcDoubleOwl(2*i, j);
-    println!("R{}+ -> L{} converts to {}", i, j, res);
-    res
+        println!("CALCULATING ADD!");
+        let res = calcDoubleOwl(2*i, j);
+        println!("R{}+ -> L{} converts to {}", i, j, res);
+        res
+    } else {
+        panic!("Wrong type of Register Instruction")
+    }
+    
 }
 
 pub fn list_encoding(nums: Vec<u32>) -> u32 {
-
     /*  Empty list => 0
         x : l => <<x, `l`>>, where `l` is the rest of the encoded list */
     println!("ENCODING A LIST");
@@ -71,7 +92,7 @@ pub fn list_encoding(nums: Vec<u32>) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use crate::encode::{reg_subtract, reg_add, reg_halt};
+    use crate::{encode::{reg_subtract, reg_add, reg_halt, encode_instr}, instr::RegInstr};
 
     use super::list_encoding;
 
@@ -84,10 +105,10 @@ mod tests {
 
     #[test]
     fn reg_instr_test() {
-        assert_eq!(reg_subtract(1, 1, 2), 152);
-        assert_eq!(reg_add(0, 0), 1);
-        assert_eq!(reg_subtract(2, 3, 4), 4576);
-        assert_eq!(reg_halt(), 0);
-        assert_eq!(reg_add(0, 2), 5);
+        assert_eq!(encode_instr(RegInstr::Sub(1, 1, 2)), 152);
+        assert_eq!(encode_instr(RegInstr::Add(0, 0)), 1);
+        assert_eq!(encode_instr(RegInstr::Sub(2, 3, 4)), 4576);
+        assert_eq!(encode_instr(RegInstr::Halt), 0);
+        assert_eq!(encode_instr(RegInstr::Add(0, 2)), 5);
     }
 }
