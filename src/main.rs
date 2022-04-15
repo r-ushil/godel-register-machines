@@ -1,5 +1,6 @@
 mod encode;
 mod decode;
+mod instr;
 
 fn main() {
     /* to encode programs:
@@ -10,8 +11,9 @@ fn main() {
 
     */
 
-    let res = encode::reg_subtract(2, 3, 4);
-    println!("{}", res);
+
+
+    
 
 
     /* to decode programs:
