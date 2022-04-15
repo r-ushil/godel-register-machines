@@ -30,7 +30,7 @@ pub fn encode_instr(instr: RegInstr) -> u32 {
 }
 
 pub fn reg_halt() -> u32{
-    return 0
+    0
 }
 
 pub fn reg_subtract(sub_instr: RegInstr) -> u32 {
@@ -78,21 +78,21 @@ pub fn list_encoding(nums: Vec<u32>) -> u32 {
         if nums.len() > 1 {
             //list is not singleton
             let tail = list_encoding(nums[1..].to_vec());
-            return calcDoubleOwl(*head, tail)
+            calcDoubleOwl(*head, tail)
         } else {
             //list is singleton
-            return calcDoubleOwl(*head, 0);
+            calcDoubleOwl(*head, 0)
         }
     } else {
         //list is empty
-        return 0
+        0
     }
 
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::{encode::{reg_subtract, reg_add, reg_halt, encode_instr}, instr::RegInstr};
+    use crate::{encode::{encode_instr}, instr::RegInstr};
 
     use super::list_encoding;
 

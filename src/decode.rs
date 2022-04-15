@@ -47,7 +47,7 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
     let y_bin = format!("{y:b}");
     println!("Rest of binary {} into decimal: {}", y_bin, y);
 
-    return (x, y)
+    (x, y)
 }
 
 pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
@@ -89,7 +89,7 @@ pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
     let y_bin = format!("{y:b}");
     println!("Rest of binary {} into decimal: {}", y_bin, y);
 
-    return (x, y)
+    (x, y)
 
 }
 
@@ -109,7 +109,7 @@ pub fn decodeList(num: u32) -> Vec<u32> {
         match next_num {
             Some('0') => val += 1,
             Some('1') => {
-                res.push(val.clone());
+                res.push(val);
                 val = 0;
             },
             Some(_) => panic!("Something broke!"),
@@ -118,10 +118,10 @@ pub fn decodeList(num: u32) -> Vec<u32> {
     }
 
     if val > 0 {
-        res.push(val.clone());
+        res.push(val);
     }
 
-    return res
+    res
 
 }
 
@@ -154,9 +154,7 @@ pub fn decodeInstr(num: u32) -> RegInstr {
 
 
 mod tests {
-    use crate::decode::decodeList;
-
-    use super::{decodeDoubleOwl, decodeSingleOwl};
+    use crate::decode::{decodeDoubleOwl, decodeSingleOwl, decodeList};
 
     #[test]
     fn decodeDoubleOwlTest() {
