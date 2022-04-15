@@ -15,7 +15,7 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
     }
 
     //convert number to binary string
-    let bin = format!("{:b}", num);
+    let bin = format!("{num:b}");
     println!("Binary of encoded number: {}", bin);
 
 
@@ -44,7 +44,7 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
     }
 
     println!("Number of trailing zeros: {}", x);
-    let y_bin = format!("{:b}", y);
+    let y_bin = format!("{y:b}");
     println!("Rest of binary {} into decimal: {}", y_bin, y);
 
     return (x, y)
@@ -55,7 +55,7 @@ pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
     println!("DECODING SINGLE OWL!");
 
     //convert number to binary string
-    let bin = format!("{:b}", num);
+    let bin = format!("{num:b}");
     println!("Binary of {}: {}", num, bin);
 
 
@@ -86,7 +86,7 @@ pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
     }
 
     println!("Number of trailing ones: {}", x);
-    let y_bin = format!("{:b}", y);
+    let y_bin = format!("{y:b}");
     println!("Rest of binary {} into decimal: {}", y_bin, y);
 
     return (x, y)
@@ -97,7 +97,7 @@ pub fn decodeList(num: u32) -> Vec<u32> {
 
     let mut res: Vec<u32> = vec!();
 
-    let bin = format!("{:b}", num);
+    let bin = format!("{num:b}");
 
     let mut rev = bin.chars().rev();
 
