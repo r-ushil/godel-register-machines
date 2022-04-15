@@ -1,6 +1,6 @@
 
 
-pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
+pub fn decode_double_owl(num: u32) -> (u32, u32) {
 
     println!("DECODING DOUBLE OWL OF: {}", num);
 
@@ -50,7 +50,7 @@ pub fn decodeDoubleOwl(num: u32) -> (u32, u32) {
     (x, y)
 }
 
-pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
+pub fn decode_single_owl(num: u32) -> (u32, u32) {
 
     println!("DECODING SINGLE OWL!");
 
@@ -93,7 +93,7 @@ pub fn decodeSingleOwl(num: u32) -> (u32, u32) {
 
 }
 
-pub fn decodeList(num: u32) -> Vec<u32> {
+pub fn decode_list(num: u32) -> Vec<u32> {
 
     let mut res: Vec<u32> = vec!();
 
@@ -125,7 +125,7 @@ pub fn decodeList(num: u32) -> Vec<u32> {
 
 }
 
-//todo!() - write decodeProgram, making use of decodeList, decodeDoubleOwl
+//todo!() - write decodeProgram, making use of decode_list, decode_double_owl
 
 use crate::instr::RegInstr;
 
@@ -137,7 +137,7 @@ pub fn decodeInstr(num: u32) -> RegInstr {
     }
 
     //convert number into double owl
-    let (a, b) = decodeDoubleOwl(num);
+    let (a, b) = decode_double_owl(num);
 
 
     //if a is even, it's an add instruction
@@ -146,33 +146,32 @@ pub fn decodeInstr(num: u32) -> RegInstr {
         RegInstr::Add(i, b)
     } else {
         let i = (a - 1) / 2;
-        let (j, k) = decodeSingleOwl(b);
+        let (j, k) = decode_single_owl(b);
         RegInstr::Sub(i, j, k)
     }   
 
 }
 
-
 mod tests {
-    use crate::decode::{decodeDoubleOwl, decodeSingleOwl, decodeList};
+    use crate::decode::{decode_double_owl, decode_single_owl, decode_list};
 
     #[test]
-    fn decodeDoubleOwlTest() {
-        assert_eq!(decodeDoubleOwl(34), (1, 8));
-        assert_eq!(decodeDoubleOwl(8), (3, 0));
-        assert_eq!(decodeDoubleOwl(276), (2, 34));
+    fn decode_double_owl_test() {
+        assert_eq!(decode_double_owl(34), (1, 8));
+        assert_eq!(decode_double_owl(8), (3, 0));
+        assert_eq!(decode_double_owl(276), (2, 34));
     }
 
     #[test]
-    fn decodeSingleOwlTest() {
-        assert_eq!(decodeSingleOwl(9), (1, 2));
-        assert_eq!(decodeSingleOwl(71), (3, 4));
+    fn decode_single_owl_test() {
+        assert_eq!(decode_single_owl(9), (1, 2));
+        assert_eq!(decode_single_owl(71), (3, 4));
     }
 
     #[test]
-    fn decodeListTest() {
-        assert_eq!(decodeList(8), vec![3]);
-        assert_eq!(decodeList(34), vec![1, 3]);
-        assert_eq!(decodeList(276), vec![2, 1, 3]);
+    fn decode_list_test() {
+        assert_eq!(decode_list(8), vec![3]);
+        assert_eq!(decode_list(34), vec![1, 3]);
+        assert_eq!(decode_list(276), vec![2, 1, 3]);
     }
 }

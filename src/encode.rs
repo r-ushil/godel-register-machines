@@ -1,6 +1,6 @@
 use crate::instr::*;
 
-pub fn calcDoubleOwl(x: u32, y: u32) -> u32 {
+pub fn calc_double_owl(x: u32, y: u32) -> u32 {
     /* 2 ^ x * ((2 * y) + 1) */
 
     println!("Calculating double owl for {}, {}", x, y);
@@ -12,11 +12,11 @@ pub fn calcDoubleOwl(x: u32, y: u32) -> u32 {
     res
 }
 
-pub fn calcSingleOwl(x: u32, y: u32) -> u32 {
+pub fn calc_single_owl(x: u32, y: u32) -> u32 {
     /* (2 ^ x * ((2 * y) + 1) - 1) */
 
     println!("Calculating single owl for {}, {}", x, y);
-    let res = calcDoubleOwl(x, y) - 1;
+    let res = calc_double_owl(x, y) - 1;
     println!("Therefore, single owl is: <{}, {}> = {}", x, y, res);
     res
 }
@@ -41,8 +41,8 @@ pub fn reg_subtract(sub_instr: RegInstr) -> u32 {
         
         println!("CALCULATING SUBTRACT!");
         println!("Calculating single owl, for second arg in subtract's double owl");
-        let snd = calcSingleOwl(j, k);
-        let res = calcDoubleOwl(2*i + 1, snd);
+        let snd = calc_single_owl(j, k);
+        let res = calc_double_owl(2*i + 1, snd);
         println!("R{}- -> L{}, L{} converts to {}", i, j, k, res);
         res
     } else {
@@ -59,7 +59,7 @@ pub fn reg_add(add_instr: RegInstr) -> u32 {
         <<2i, j>> */
 
         println!("CALCULATING ADD!");
-        let res = calcDoubleOwl(2*i, j);
+        let res = calc_double_owl(2*i, j);
         println!("R{}+ -> L{} converts to {}", i, j, res);
         res
     } else {
@@ -78,10 +78,10 @@ pub fn list_encoding(nums: Vec<u32>) -> u32 {
         if nums.len() > 1 {
             //list is not singleton
             let tail = list_encoding(nums[1..].to_vec());
-            calcDoubleOwl(*head, tail)
+            calc_double_owl(*head, tail)
         } else {
             //list is singleton
-            calcDoubleOwl(*head, 0)
+            calc_double_owl(*head, 0)
         }
     } else {
         //list is empty
